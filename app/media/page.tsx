@@ -1,19 +1,89 @@
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
 
 export default function MediaPage() {
   return (
-    <div className="px-4">
+    <div className="flex flex-col w-full p-4">
       <h2 className="text-2xl font-bold mb-4">TRENDING POSTS</h2>
 
-      <div className="space-y-8">
-        <TrendingSection title="House of Highlights" />
-        <TrendingSection title="Bleacher Report" />
-
-        <div>
+      <div className="flex flex-col gap-8">
+        <div className="max-w-full">
           <div className="flex items-center gap-3 mb-4">
             <Image
-              src="/placeholder.svg"
+              src="/Media/househighlights.png"
+              alt={"House of Highlights"}
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+            <h3 className="text-xl text-gray-500">House of Highlights</h3>
+          </div>
+
+          <div className="flex justify-between gap-2">
+            <Image
+              src="/Media/post1.png"
+              alt={`House of Highlights`}
+              width={30}
+              height={30}
+              className="w-full"
+            />
+            <Image
+              src="/Media/post2.png"
+              alt={`House of Highlights`}
+              width={30}
+              height={30}
+              className="w-full"
+            />
+            <Image
+              src="/Media/post3.png"
+              alt={`House of Highlights`}
+              width={30}
+              height={30}
+              className="w-full"
+            />
+          </div>
+        </div>
+
+        <div className="max-w-full">
+          <div className="flex items-center gap-3 mb-4">
+            <Image
+              src="/Media/br.png"
+              alt={"Bleacher Report"}
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+            <h3 className="text-xl text-gray-500">Bleacher Report</h3>
+          </div>
+
+          <div className="flex justify-between gap-2">
+            <Image
+              src="/Media/post4.png"
+              alt={`Bleacher Report`}
+              width={30}
+              height={30}
+              className="w-full"
+            />
+            <Image
+              src="/Media/post5.png"
+              alt={`Bleacher Report`}
+              width={30}
+              height={30}
+              className="w-full"
+            />
+            <Image
+              src="/Media/post6.png"
+              alt={`Bleacher Report`}
+              width={30}
+              height={30}
+              className="w-full"
+            />
+          </div>
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold mb-4">LATEST TWEETS</h2>
+          <div className="flex items-center gap-3 mb-4">
+            <Image
+              src="/Media/nba.jpg"
               alt="NBA"
               width={40}
               height={40}
@@ -22,53 +92,30 @@ export default function MediaPage() {
             <h3 className="text-xl text-gray-500">NBA</h3>
           </div>
 
-          <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <Card key={i}>
-                <CardContent className="p-4">
-                  <p className="text-gray-600">
-                    And now this court will bear the signature of his name
-                    forever.
-                  </p>
-                  <p className="text-sm text-gray-400 mt-2">10m ago</p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="flex flex-col gap-4">
+            <Image
+              src="/Media/tweet1.png"
+              alt="NBA"
+              width={10}
+              height={10}
+              className="w-full"
+            />
+            <Image
+              src="/Media/tweet2.png"
+              alt="NBA"
+              width={10}
+              height={10}
+              className="w-full"
+            />
+            <Image
+              src="/Media/tweet3.png"
+              alt="NBA"
+              width={10}
+              height={10}
+              className="w-full"
+            />
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function TrendingSection({ title }: { title: string }) {
-  return (
-    <div>
-      <div className="flex items-center gap-3 mb-4">
-        <Image
-          src="/placeholder.svg"
-          alt={title}
-          width={40}
-          height={40}
-          className="rounded-full"
-        />
-        <h3 className="text-xl text-gray-500">{title}</h3>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {[1, 2, 3].map((i) => (
-          <Card key={i}>
-            <CardContent className="p-0">
-              <Image
-                src="/placeholder.svg"
-                alt={`${title} ${i}`}
-                width={400}
-                height={300}
-                className="w-full h-48 object-cover"
-              />
-            </CardContent>
-          </Card>
-        ))}
       </div>
     </div>
   );

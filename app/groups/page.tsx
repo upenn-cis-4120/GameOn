@@ -1,20 +1,33 @@
-'use client'
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import { Send } from 'lucide-react'
-import { groups, messages } from "@/data/messages"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { useState } from "react";
+import { Plus, Send } from "lucide-react";
+import { groups as initialGroups, messages } from "@/data/messages";
+import { friends } from "@/data/friends";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function GroupsPage() {
-  const [selectedGroup, setSelectedGroup] = useState(groups[0])
-  const [newMessage, setNewMessage] = useState("")
-  const [groupMessages, setGroupMessages] = useState(messages)
+  const [groups, setGroups] = useState(initialGroups);
+  const [selectedGroup, setSelectedGroup] = useState(groups[0]);
+  const [newMessage, setNewMessage] = useState("");
+  const [groupMessages, setGroupMessages] = useState(messages);
+  const [isCreatingGroup, setIsCreatingGroup] = useState(false);
+  const [newGroupName, setNewGroupName] = useState("");
+  const [selectedFriends, setSelectedFriends] = useState<string[]>([]);
 
   const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!newMessage.trim()) return
+    e.preventDefault();
+    if (!newMessage.trim()) return;
 
     const message = {
       id: groupMessages.length + 1,
@@ -22,12 +35,34 @@ export default function GroupsPage() {
       sender: "You",
       content: newMessage,
       timestamp: new Date().toISOString(),
-      avatar: "/placeholder.svg?height=40&width=40"
-    }
+      avatar: "/placeholder.svg?height=40&width=40",
+    };
 
-    setGroupMessages([...groupMessages, message])
-    setNewMessage("")
-  }
+    setGroupMessages([...groupMessages, message]);
+    setNewMessage("");
+  };
+
+  const handleCreateGroup = () => {
+    if (newGroupName.trim() === "") return;
+    const newGroup = {
+      id: `group-${groups.length + 1}`,
+      name: newGroupName,
+      image: "/placeholder.svg?height=100&width=100",
+      members: selectedFriends.length,
+    };
+    setGroups([...groups, newGroup]);
+    setIsCreatingGroup(false);
+    setNewGroupName("");
+    setSelectedFriends([]);
+  };
+
+  const toggleFriendSelection = (friendId: string) => {
+    setSelectedFriends((prev) =>
+      prev.includes(friendId)
+        ? prev.filter((id) => id !== friendId)
+        : [...prev, friendId]
+    );
+  };
 
   return (
     <div className="flex h-[calc(100vh-136px)]">
@@ -37,7 +72,7 @@ export default function GroupsPage() {
             key={group.id}
             onClick={() => setSelectedGroup(group)}
             className={`w-full text-left p-4 flex items-center gap-3 ${
-              selectedGroup.id === group.id ? 'bg-blue-50' : 'hover:bg-gray-100'
+              selectedGroup.id === group.id ? "bg-blue-50" : "hover:bg-gray-100"
             }`}
           >
             <Image
@@ -49,10 +84,53 @@ export default function GroupsPage() {
             />
             <div>
               <div className="font-medium">{group.name}</div>
-              <div className="text-sm text-gray-500">{group.members} members</div>
+              <div className="text-sm text-gray-500">
+                {group.members} members
+              </div>
             </div>
           </button>
         ))}
+        <Dialog open={isCreatingGroup} onOpenChange={setIsCreatingGroup}>
+          <DialogTrigger asChild>
+            <Button
+              className="w-full mt-4"
+              onClick={() => setIsCreatingGroup(true)}
+            >
+              <Plus className="mr-2 h-4 w-4" /> Create New Group
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Create New Group</DialogTitle>
+            </DialogHeader>
+            <Input
+              placeholder="Group Name"
+              value={newGroupName}
+              onChange={(e) => setNewGroupName(e.target.value)}
+              className="mb-4"
+            />
+            <div className="space-y-2 max-h-60 overflow-y-auto">
+              {friends.map((friend) => (
+                <div key={friend.id} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`friend-${friend.id}`}
+                    checked={selectedFriends.includes(friend.id)}
+                    onCheckedChange={() => toggleFriendSelection(friend.id)}
+                  />
+                  <label
+                    htmlFor={`friend-${friend.id}`}
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    {friend.name}
+                  </label>
+                </div>
+              ))}
+            </div>
+            <Button onClick={handleCreateGroup} className="mt-4">
+              Create Group
+            </Button>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="flex-1 flex flex-col">
@@ -95,6 +173,5 @@ export default function GroupsPage() {
         </form>
       </div>
     </div>
-  )
+  );
 }
-

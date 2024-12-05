@@ -1,16 +1,15 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function MediaPage() {
   return (
     <div className="px-4">
       <h2 className="text-2xl font-bold mb-4">TRENDING POSTS</h2>
-      
+
       <div className="space-y-8">
         <TrendingSection title="House of Highlights" />
         <TrendingSection title="Bleacher Report" />
-        
+
         <div>
           <div className="flex items-center gap-3 mb-4">
             <Image
@@ -22,13 +21,14 @@ export default function MediaPage() {
             />
             <h3 className="text-xl text-gray-500">NBA</h3>
           </div>
-          
+
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
               <Card key={i}>
                 <CardContent className="p-4">
                   <p className="text-gray-600">
-                    "And now this court will bear the signature of his name forever."
+                    And now this court will bear the signature of his name
+                    forever.
                   </p>
                   <p className="text-sm text-gray-400 mt-2">10m ago</p>
                 </CardContent>
@@ -38,7 +38,7 @@ export default function MediaPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function TrendingSection({ title }: { title: string }) {
@@ -54,7 +54,7 @@ function TrendingSection({ title }: { title: string }) {
         />
         <h3 className="text-xl text-gray-500">{title}</h3>
       </div>
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[1, 2, 3].map((i) => (
           <Card key={i}>
@@ -71,6 +71,5 @@ function TrendingSection({ title }: { title: string }) {
         ))}
       </div>
     </div>
-  )
+  );
 }
-

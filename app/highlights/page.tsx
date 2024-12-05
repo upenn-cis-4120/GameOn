@@ -1,6 +1,6 @@
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function HighlightsPage() {
   return (
@@ -18,7 +18,8 @@ export default function HighlightsPage() {
             <div className="p-4">
               <h2 className="text-xl font-bold">CELTICS VS KNICKS</h2>
               <p className="text-gray-500">
-                Celtics celebrate Banner 18 by making record-tying 29 3-pointers and crushing Knicks 132-109.
+                Celtics celebrate Banner 18 by making record-tying 29 3-pointers
+                and crushing Knicks 132-109.
               </p>
               <div className="flex justify-center gap-2 mt-4">
                 <div className="w-2 h-2 rounded-full bg-blue-500"></div>
@@ -64,7 +65,7 @@ export default function HighlightsPage() {
             "South Carolina vs. Iowa",
             "Iowa vs. UConn",
             "Iowa vs. LSU",
-            "Iowa vs. Colorado"
+            "Iowa vs. Colorado",
           ].map((match) => (
             <Card key={match}>
               <CardContent className="p-0">
@@ -76,7 +77,9 @@ export default function HighlightsPage() {
                   className="w-full h-32 object-cover"
                 />
                 <div className="p-3">
-                  <div className="text-sm text-gray-500">March Madness 2023</div>
+                  <div className="text-sm text-gray-500">
+                    March Madness 2023
+                  </div>
                   <div className="font-medium">{match}</div>
                 </div>
               </CardContent>
@@ -85,6 +88,5 @@ export default function HighlightsPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
-

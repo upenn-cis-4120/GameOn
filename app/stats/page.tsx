@@ -1,6 +1,6 @@
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function StatsPage() {
   return (
@@ -34,40 +34,54 @@ export default function StatsPage() {
           <h2 className="text-2xl font-bold">STATISTICS</h2>
           <Button variant="link">See All</Button>
         </div>
-        
+
         <div className="space-y-4">
           {[
             { name: "Joel Embiid", pts: 39, ast: 7, reb: 10 },
             { name: "Tyrese Maxey", pts: 25, ast: 8, reb: 2 },
             { name: "Jalen Brunson", pts: 41, ast: 12, reb: 3 },
-            { name: "Julius Randle", pts: 28, ast: 3, reb: 6 }
+            { name: "Julius Randle", pts: 28, ast: 3, reb: 6 },
           ].map((player) => (
             <PlayerStats key={player.name} player={player} />
           ))}
         </div>
       </section>
     </div>
-  )
+  );
 }
 
-function TeamScore({ team, score, reverse = false }: { team: string; score: number; reverse?: boolean }) {
+function TeamScore({
+  team,
+  score,
+  reverse = false,
+}: {
+  team: string;
+  score: number;
+  reverse?: boolean;
+}) {
   return (
-    <div className={`flex items-center gap-2 ${reverse ? 'flex-row-reverse' : ''}`}>
+    <div
+      className={`flex items-center gap-2 ${reverse ? "flex-row-reverse" : ""}`}
+    >
       <Image
         src="/placeholder.svg"
         alt={`${team} logo`}
         width={40}
         height={40}
       />
-      <div className={reverse ? 'text-right' : ''}>
+      <div className={reverse ? "text-right" : ""}>
         <div className="font-bold">{team}</div>
         <div className="text-2xl font-bold">{score}</div>
       </div>
     </div>
-  )
+  );
 }
 
-function PlayerStats({ player }: { player: { name: string; pts: number; ast: number; reb: number } }) {
+function PlayerStats({
+  player,
+}: {
+  player: { name: string; pts: number; ast: number; reb: number };
+}) {
   return (
     <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
       <Image
@@ -86,6 +100,5 @@ function PlayerStats({ player }: { player: { name: string; pts: number; ast: num
         </div>
       </div>
     </div>
-  )
+  );
 }
-

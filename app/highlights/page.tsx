@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Heart, MessageCircle, Share2 } from "lucide-react";
 import { highlights, Highlight } from "@/data/highlights";
+import YouTubeShort from "@/components/youtube";
 
 export default function HighlightsPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,17 +49,9 @@ function HighlightItem({
   isActive: boolean;
 }) {
   return (
-    <div className="h-[calc(100vh-4rem)] snap-start flex flex-col relative">
+    <div className="h-[calc(100vh-4rem)] snap-start flex flex-col relative max-h-[733px]">
       <div className="flex-1 bg-black">
-        <iframe
-          width="100%"
-          height="100%"
-          src={`${highlight.videoUrl}`}
-          title={highlight.title}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+        <YouTubeShort videoId={highlight.videoId} />
       </div>
       <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent text-white">
         <div className="flex items-center mb-2">

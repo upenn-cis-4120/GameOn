@@ -50,13 +50,15 @@ function HighlightItem({
   return (
     <div className="h-[calc(100vh-4rem)] snap-start flex flex-col relative">
       <div className="flex-1 bg-black">
-        <Image
-          src={highlight.videoUrl}
-          alt={highlight.title}
-          layout="fill"
-          objectFit="contain"
-          priority={isActive}
-        />
+        <iframe
+          width="100%"
+          height="100%"
+          src={`${highlight.videoUrl}`}
+          title={highlight.title}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
       </div>
       <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent text-white">
         <div className="flex items-center mb-2">

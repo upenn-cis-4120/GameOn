@@ -20,7 +20,7 @@ export default function RootLayout({
           <ClientOnly>
             <HeaderAndNav />
           </ClientOnly>
-          <main className="pt-[80px] pb-20">{children}</main>
+          <main className="mt-[55px] mb-[56px]">{children}</main>
         </SportsProvider>
       </body>
     </html>
@@ -37,7 +37,7 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
 
 function HeaderAndNav() {
   const pathname = usePathname();
-  const isVisible = (pathname !== "/" && pathname !== "/signup");
+  const isVisible = pathname !== "/" && pathname !== "/signup";
 
   return (
     <>

@@ -10,35 +10,35 @@ export function BottomNav({ isVisible }: { isVisible: boolean }) {
   if (!isVisible) return null;
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 border-t bg-white">
-      <div className="flex justify-around items-center h-16">
+    <nav className="fixed bottom-0 left-0 right-0 border-t bg-white z-40">
+      <div className="flex justify-around items-center h-14">
         <NavItem
           href="/media"
-          icon={<Image className="h-6 w-6" />}
+          icon={<Image className="h-4 w-4" />}
           label="Media"
           active={pathname === "/media"}
         />
         <NavItem
           href="/highlights"
-          icon={<Play className="h-6 w-6" />}
+          icon={<Play className="h-4 w-4" />}
           label="Highlights"
           active={pathname === "/highlights"}
         />
         <NavItem
           href="/home"
-          icon={<Home className="h-6 w-6" />}
+          icon={<Home className="h-4 w-4" />}
           label="Home"
           active={pathname === "/home"}
         />
         <NavItem
           href="/stats"
-          icon={<BarChart2 className="h-6 w-6" />}
+          icon={<BarChart2 className="h-4 w-4" />}
           label="Stats"
           active={pathname === "/stats"}
         />
         <NavItem
           href="/groups"
-          icon={<Users className="h-6 w-6" />}
+          icon={<Users className="h-4 w-4" />}
           label="Groups"
           active={pathname === "/groups"}
         />
@@ -61,8 +61,9 @@ function NavItem({
   return (
     <Link
       href={href}
-      className={`flex flex-col items-center space-y-1 ${active ? "text-blue-500" : "text-gray-500"
-        }`}
+      className={`flex flex-col items-center space-y-1 ${
+        active ? "text-blue-500" : "text-gray-500"
+      }`}
     >
       {icon}
       <span className="text-xs">{label}</span>

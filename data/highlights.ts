@@ -14,14 +14,14 @@ export interface Highlight {
   export const highlights: Highlight[] = [
     {
       id: '1',
-      videoUrl: '/placeholder.svg?height=800&width=450&text=Basketball+Highlight',
-      title: "Amazing Slam Dunk",
-      description: "Watch this incredible slam dunk from last night's game!",
+      videoUrl: 'https://www.youtube.com/embed/u_mazHGvjHc',
+      title: "Cold Celebration",
+      description: "Lebron Does the Silencer!",
       likes: 1500,
       comments: 230,
       user: {
-        name: "BasketballFan23",
-        avatar: "/placeholder.svg?height=50&width=50"
+      name: "BasketballFan23",
+      avatar: "/Groups/Antwon.png"
       }
     },
     {

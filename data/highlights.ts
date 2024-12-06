@@ -28,8 +28,8 @@ export interface Highlight {
     },
     {
       id: '2',
-      videoUrl: 'https://www.youtube.com/shorts/l8MdkZ0_KLI',
-      videoId: 'l8MdkZ0_KLI',
+      videoUrl: 'https://www.youtube.com/shorts/q3S1DQtE4Xw',
+      videoId: 'q3S1DQtE4Xw',
       title: "Game-Winning Touchdown",
       description: "This last-second touchdown secured the victory!",
       likes: 2300,
@@ -80,8 +80,8 @@ export interface Highlight {
     },
     {
       id: '6',
-      videoUrl: 'https://www.youtube.com/shorts/dm4aux9nmik',
-      videoId: 'dm4aux9nmik',
+      videoUrl: 'https://www.youtube.com/shorts/-86KtwKly_0',
+      videoId: '-86KtwKly_0',
       title: "Record-Breaking Freestyle",
       description: "New world record set in the 100m freestyle!",
       likes: 2100,

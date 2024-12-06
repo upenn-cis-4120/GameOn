@@ -64,20 +64,6 @@ function HighlightItem({
         </div>
         <h2 className="text-xl font-bold mb-1">{highlight.title}</h2>
         <p className="text-sm mb-2">{highlight.description}</p>
-        <div className="flex items-center space-x-4">
-          <button className="flex items-center">
-            <Heart className="w-6 h-6 mr-1" />
-            <span>{highlight.likes}</span>
-          </button>
-          <button className="flex items-center">
-            <MessageCircle className="w-6 h-6 mr-1" />
-            <span>{highlight.comments}</span>
-          </button>
-          <button className="flex items-center">
-            <Share2 className="w-6 h-6 mr-1" />
-            <span>Share</span>
-          </button>
-        </div>
       </div>
     </div>
   );

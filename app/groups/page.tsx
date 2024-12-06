@@ -35,7 +35,7 @@ export default function GroupsPage() {
       sender: "You",
       content: newMessage,
       timestamp: new Date().toISOString(),
-      avatar: "/placeholder.svg?height=40&width=40",
+      avatar: "/danae.jpg",
     };
 
     setGroupMessages([...groupMessages, message]);
@@ -66,13 +66,14 @@ export default function GroupsPage() {
 
   return (
     <div className="flex h-[calc(100vh-136px)]">
-      <div className="w-64 border-r overflow-y-auto">
+      <div className="w-16 border-r overflow-y-auto">
         {groups.map((group) => (
           <button
             key={group.id}
             onClick={() => setSelectedGroup(group)}
-            className={`w-full text-left p-4 flex items-center gap-3 ${selectedGroup.id === group.id ? "bg-blue-50" : "hover:bg-gray-100"
-              }`}
+            className={`text-left p-3 flex items-center gap-3 ${
+              selectedGroup.id === group.id ? "bg-blue-50" : "hover:bg-gray-100"
+            }`}
           >
             <Image
               src={group.image}
@@ -81,21 +82,15 @@ export default function GroupsPage() {
               height={40}
               className="rounded-full"
             />
-            <div>
-              <div className="font-medium">{group.name}</div>
-              <div className="text-sm text-gray-500">
-                {group.members} members
-              </div>
-            </div>
           </button>
         ))}
         <Dialog open={isCreatingGroup} onOpenChange={setIsCreatingGroup}>
           <DialogTrigger asChild>
             <Button
-              className="w-full mt-4"
+              className="m-3 flex justify-center items-center space-x-2 rounded-full p-2 bg-blue-300 hover:bg-gray-300"
               onClick={() => setIsCreatingGroup(true)}
             >
-              <Plus className="mr-2 h-4 w-4" /> Create New Group
+              <Plus className="m-[4px] h-4 w-4" />
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -125,7 +120,7 @@ export default function GroupsPage() {
                 </div>
               ))}
             </div>
-            <Button onClick={handleCreateGroup} className="mt-4">
+            <Button onClick={handleCreateGroup} className="mt-4 bg-blue-400">
               Create Group
             </Button>
           </DialogContent>
@@ -135,6 +130,9 @@ export default function GroupsPage() {
       <div className="flex-1 flex flex-col">
         <div className="p-4 border-b bg-gray-50">
           <h3 className="font-bold">{selectedGroup.name}</h3>
+          <div className="text-sm text-gray-500">
+            {selectedGroup.members} members
+          </div>
         </div>
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {groupMessages
@@ -165,7 +163,7 @@ export default function GroupsPage() {
               placeholder="Type a message..."
               className="flex-1"
             />
-            <Button type="submit" size="icon">
+            <Button type="submit" size="icon" className="bg-blue-400">
               <Send className="h-4 w-4" />
             </Button>
           </div>

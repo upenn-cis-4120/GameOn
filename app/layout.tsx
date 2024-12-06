@@ -20,7 +20,7 @@ export default function RootLayout({
           <ClientOnly>
             <HeaderAndNav />
           </ClientOnly>
-          <main className="pt-[80px] pb-20">{children}</main>
+          <main className="pt-[80px] pb-[80px]">{children}</main>
         </SportsProvider>
       </body>
     </html>

@@ -65,7 +65,7 @@ export default function GroupsPage() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-136px)]">
+    <div className="flex h-[calc(100vh-112px)]">
       <div className="w-16 border-r overflow-y-auto">
         {groups.map((group) => (
           <button

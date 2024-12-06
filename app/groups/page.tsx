@@ -71,9 +71,8 @@ export default function GroupsPage() {
           <button
             key={group.id}
             onClick={() => setSelectedGroup(group)}
-            className={`w-full text-left p-4 flex items-center gap-3 ${
-              selectedGroup.id === group.id ? "bg-blue-50" : "hover:bg-gray-100"
-            }`}
+            className={`w-full text-left p-4 flex items-center gap-3 ${selectedGroup.id === group.id ? "bg-blue-50" : "hover:bg-gray-100"
+              }`}
           >
             <Image
               src={group.image}

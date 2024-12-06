@@ -14,7 +14,7 @@ const YouTubeShort: React.FC<YouTubeShortProps> = ({ videoId }) => {
     },
   };
 
-  const onReady = (event: any) => {
+  const onReady = (event: { target: { pauseVideo: () => void } }) => {
     event.target.pauseVideo();
   };
 

@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Heart, MessageCircle, Share2 } from "lucide-react";
 import { highlights, Highlight } from "@/data/highlights";
 import YouTubeShort from "@/components/youtube";
 
@@ -43,7 +42,6 @@ export default function HighlightsPage() {
 
 function HighlightItem({
   highlight,
-  isActive,
 }: {
   highlight: Highlight;
   isActive: boolean;

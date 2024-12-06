@@ -8,7 +8,7 @@ export function Header({ isVisible }: { isVisible: boolean }) {
       <div className="p-2 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <img
-            src="/Logo.png"
+            src="/logo_text.png"
             alt="GameOn Logo"
             className="h-7 w-auto" // Smaller size for the logo
           />

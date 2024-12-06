@@ -16,7 +16,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-50`}>
         <SportsProvider>
           <Header />
-          <main className="pt-16 pb-20">{children}</main>
+          <main className="pt-[80px] pb-20">{children}</main>
           <BottomNav />
         </SportsProvider>
       </body>

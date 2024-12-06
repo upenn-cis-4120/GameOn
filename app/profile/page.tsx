@@ -15,12 +15,7 @@ const allSports = [
   "Football",
   "Soccer",
   "Tennis",
-  "Golf",
-  "Baseball",
-  "Hockey",
-  "Cricket",
-  "Rugby",
-  "Volleyball",
+  "Golf"
 ];
 
 export default function ProfilePage() {
@@ -33,12 +28,12 @@ export default function ProfilePage() {
     );
   };
 
-  const addNewSport = () => {
-    if (newSport && !selectedSports.includes(newSport)) {
-      setSelectedSports((prev) => [...prev, newSport]);
-      setNewSport("");
-    }
-  };
+  // const addNewSport = () => {
+  //   if (newSport && !selectedSports.includes(newSport)) {
+  //     setSelectedSports((prev) => [...prev, newSport]);
+  //     setNewSport("");
+  //   }
+  // };
 
   return (
     <div className="px-4 py-6">
@@ -84,19 +79,6 @@ export default function ProfilePage() {
                 {sport}
               </Badge>
             ))}
-          </div>
-          <div className="flex gap-2">
-            <Input
-              placeholder="Add custom sport"
-              value={newSport}
-              onChange={(e) => setNewSport(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  addNewSport();
-                }
-              }}
-            />
-            <Button onClick={addNewSport}>Add</Button>
           </div>
         </CardContent>
       </Card>

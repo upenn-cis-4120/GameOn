@@ -5,7 +5,7 @@ export const messages = [
     sender: "Alex",
     content: "Did you see that game-winning shot?",
     timestamp: "2023-12-04T22:30:00Z",
-    avatar: "/placeholder.svg?height=40&width=40"
+    avatar: "/Groups/Antwon.png"
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ export const messages = [
     sender: "Jordan",
     content: "What a comeback in the fourth quarter!",
     timestamp: "2023-12-04T22:15:00Z",
-    avatar: "/placeholder.svg?height=40&width=40"
+    avatar: "/Groups/Jake.png"
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ export const messages = [
     sender: "Taylor",
     content: "Next game is going to be intense",
     timestamp: "2023-12-04T22:00:00Z",
-    avatar: "/placeholder.svg?height=40&width=40"
+    avatar: "/Groups/Jamie.png"
   }
 ]
 
@@ -29,25 +29,25 @@ export const groups = [
   {
     id: "brick-squad",
     name: "Brick Squad",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/Groups/group1.png",
     members: 128
   },
   {
     id: "hurts-lovers",
     name: "Hurts Lovers",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/Groups/group2.png",
     members: 256
   },
   {
     id: "batter-up",
     name: "Batter Up",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/Groups/group3.png",
     members: 64
   },
   {
     id: "ball-is-life",
     name: "Ball is Life",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/Groups/group4.png",
     members: 512
   }
 ]

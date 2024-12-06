@@ -8,6 +8,14 @@ export const messages = [
     avatar: "/Groups/Antwon.png"
   },
   {
+    id: 5,
+    groupId: "brick-squad",
+    sender: "Patrick",
+    content: "Yea that was so clutch!",
+    timestamp: "2023-12-04T22:31:00Z",
+    avatar: "/Groups/Patrick.png"
+  },
+  {
     id: 2,
     groupId: "hurts-lovers",
     sender: "Jordan",
@@ -22,6 +30,14 @@ export const messages = [
     content: "Next game is going to be intense",
     timestamp: "2023-12-04T22:00:00Z",
     avatar: "/Groups/Jamie.png"
+  },
+  {
+    id: 4,
+    groupId: "ball-is-life",
+    sender: "Chris",
+    content: "I can't believe that dunk!",
+    timestamp: "2023-12-04T21:45:00Z",
+    avatar: "/Groups/Marvin.png"
   }
 ]
 

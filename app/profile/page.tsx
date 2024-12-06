@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useSports } from "@/contexts/SportsContext";
 
-const allSports = ["Basketball", "Football", "Soccer", "Tennis", "Golf"];
+const allSports = ["Basketball", "Soccer", "Tennis", "Golf"];
 
 export default function ProfilePage() {
   const { selectedSports, setSelectedSports } = useSports();

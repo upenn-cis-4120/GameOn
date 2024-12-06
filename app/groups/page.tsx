@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Plus, Send } from "lucide-react";
 import { groups as initialGroups, messages } from "@/data/messages";
 import { friends } from "@/data/friends";
@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function GroupsPage() {
   const [groups, setGroups] = useState(initialGroups);
@@ -24,6 +25,18 @@ export default function GroupsPage() {
   const [isCreatingGroup, setIsCreatingGroup] = useState(false);
   const [newGroupName, setNewGroupName] = useState("");
   const [selectedFriends, setSelectedFriends] = useState<string[]>([]);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const community = searchParams.get('community');
+
+  useEffect(() => {
+    if (community) {
+      const group = groups.find((g) => g.name === community);
+      if (group) {
+        setSelectedGroup(group);
+      }
+    }
+  }, [community, groups]);
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -71,9 +84,8 @@ export default function GroupsPage() {
           <button
             key={group.id}
             onClick={() => setSelectedGroup(group)}
-            className={`text-left p-3 flex items-center gap-3 ${
-              selectedGroup.id === group.id ? "bg-blue-50" : "hover:bg-gray-100"
-            }`}
+            className={`text-left p-3 flex items-center gap-3 ${selectedGroup.id === group.id ? "bg-blue-50" : "hover:bg-gray-100"
+              }`}
           >
             <Image
               src={group.image}

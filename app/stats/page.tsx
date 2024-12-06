@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSports } from "@/contexts/SportsContext";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 
 const sportStats: { [key: string]: { team: string; logo: string; players: { name: string; pts: number; ast: number; reb: number; img: string }[] }[] } = {
   Basketball: [
@@ -13,6 +13,9 @@ const sportStats: { [key: string]: { team: string; logo: string; players: { name
       players: [
         { name: "Joel Embiid", pts: 39, ast: 7, reb: 10, img: "/Stats/joel-embiid.png" },
         { name: "Tyrese Maxey", pts: 25, ast: 8, reb: 2, img: "/Stats/tyrese-maxey.png" },
+        { name: "Paul George", pts: 33, ast: 15, reb: 6, img: "/Stats/paul-george1.png" },
+        { name: "Jared Mccain", pts: 20, ast: 5, reb: 3, img: "/Stats/jared-mccain.png" },
+        { name: "Kyle Lowry", pts: 15, ast: 10, reb: 5, img: "/Stats/kyle-lowry.png" },
       ],
     },
     {
@@ -21,6 +24,9 @@ const sportStats: { [key: string]: { team: string; logo: string; players: { name
       players: [
         { name: "Julius Randle", pts: 28, ast: 3, reb: 6, img: "/Stats/julius-randle.png" },
         { name: "Jalen Brunson", pts: 41, ast: 12, reb: 3, img: "/Stats/jalen-brunson.png" },
+        { name: "OG Anunoby", pts: 22, ast: 5, reb: 4, img: "/Stats/anunoby.png" },
+        { name: "Karl-Anthony Towns", pts: 18, ast: 7, reb: 2, img: "/Stats/kat.png" },
+        { name: "Mikal Bridges", pts: 10, ast: 2, reb: 8, img: "/Stats/bridges.png" },
       ],
     },
   ],
@@ -47,16 +53,16 @@ const sportStats: { [key: string]: { team: string; logo: string; players: { name
 
 const sportVideos: { [key: string]: string } = {
   Basketball: "https://www.youtube.com/embed/7VUvcuHwgtw?si=G43zmdB6VHMfbUNJ",
-  Football: "https://www.youtube.com/embed/1RwlGrjUdek?si=TCp8qg7Bj5xu05vJ",
-  Soccer: "https://www.youtube.com/embed/7fS04X3Qy4Y?si=buwhXLzEU0dtRqng",
-  Tennis: "https://www.youtube.com/embed/KrV9XK36U1A?si=8XU5KDYpTZ_Eil4l",
-  Golf: "https://www.youtube.com/embed/P0BXiDrkt04?si=7BGDbGIjgxlH-a1r",
+  // Football: "https://www.youtube.com/embed/1RwlGrjUdek?si=TCp8qg7Bj5xu05vJ",
+  // Soccer: "https://www.youtube.com/embed/7fS04X3Qy4Y?si=buwhXLzEU0dtRqng",
+  // Tennis: "https://www.youtube.com/embed/KrV9XK36U1A?si=8XU5KDYpTZ_Eil4l",
+  // Golf: "https://www.youtube.com/embed/P0BXiDrkt04?si=7BGDbGIjgxlH-a1r",
   // Add more sports and their corresponding YouTube embed URLs
 };
 
 export default function StatsPage() {
   const { selectedSports } = useSports();
-  const [showAllPlayers, setShowAllPlayers] = useState(false);
+  // const [showAllPlayers, setShowAllPlayers] = useState(false);
 
   return (
     <div className="px-4">
@@ -88,9 +94,6 @@ export default function StatsPage() {
                       <TeamScore key={teamStats.team} team={teamStats.team} score={index === 0 ? 101 : 104} logo={teamStats.logo} reverse={index !== 0} />
                     ))}
                   </div>
-                  <Button className="w-full" variant="secondary">
-                    See Match
-                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -105,9 +108,9 @@ export default function StatsPage() {
       <section>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-blue-600">STATISTICS</h2>
-          <Button variant="link" onClick={() => setShowAllPlayers(!showAllPlayers)}>
+          {/* <Button variant="link" onClick={() => setShowAllPlayers(!showAllPlayers)}>
             {showAllPlayers ? "Show Less" : "See All"}
-          </Button>
+          </Button> */}
         </div>
 
         <div className="space-y-4">
@@ -116,7 +119,7 @@ export default function StatsPage() {
               sportStats[sport]?.map((teamStats) => (
                 <div key={teamStats.team} className="bg-blue-50 p-4 rounded-lg">
                   <h3 className="text-xl font-bold mb-2 text-blue-700">{teamStats.team}</h3>
-                  {teamStats.players.slice(0, showAllPlayers ? teamStats.players.length : 2).map((player) => (
+                  {teamStats.players.map((player) => (
                     <PlayerStats key={player.name} player={player} />
                   ))}
                 </div>

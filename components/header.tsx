@@ -16,7 +16,7 @@ export function Header({ isVisible }: { isVisible: boolean }) {
         <Link href="/profile">
           <Button variant="ghost" size="icon" className="rounded-full">
             <img
-              src="/Danae.jpg"
+              src="/danae.jpg"
               alt="Profile"
               className="rounded-full"
               height={30}

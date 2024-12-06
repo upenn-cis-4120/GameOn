@@ -1,92 +1,91 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Heart, MessageCircle, Share2 } from "lucide-react";
+import { highlights, Highlight } from "@/data/highlights";
 
 export default function HighlightsPage() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollPosition = container.scrollTop;
+      const highlightHeight = container.clientHeight;
+      const newIndex = Math.round(scrollPosition / highlightHeight);
+      setCurrentIndex(newIndex);
+    };
+
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="px-4">
-      <section className="mb-8">
-        <Card className="overflow-hidden">
-          <CardContent className="p-0">
-            <Image
-              src="/placeholder.svg"
-              alt="Celtics game"
-              width={600}
-              height={400}
-              className="w-full h-64 object-cover"
-            />
-            <div className="p-4">
-              <h2 className="text-xl font-bold">CELTICS VS KNICKS</h2>
-              <p className="text-gray-500">
-                Celtics celebrate Banner 18 by making record-tying 29 3-pointers
-                and crushing Knicks 132-109.
-              </p>
-              <div className="flex justify-center gap-2 mt-4">
-                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-                <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
+    <div
+      ref={containerRef}
+      className="h-[calc(100vh-4rem)] overflow-y-scroll snap-y snap-mandatory"
+    >
+      {highlights.map((highlight, index) => (
+        <HighlightItem
+          key={highlight.id}
+          highlight={highlight}
+          isActive={index === currentIndex}
+        />
+      ))}
+    </div>
+  );
+}
 
-      <section className="mb-8">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">FEATURED MATCH</h2>
-          <Button variant="link">See All</Button>
+function HighlightItem({
+  highlight,
+  isActive,
+}: {
+  highlight: Highlight;
+  isActive: boolean;
+}) {
+  return (
+    <div className="h-[calc(100vh-4rem)] snap-start flex flex-col relative">
+      <div className="flex-1 bg-black">
+        <Image
+          src={highlight.videoUrl}
+          alt={highlight.title}
+          layout="fill"
+          objectFit="contain"
+          priority={isActive}
+        />
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent text-white">
+        <div className="flex items-center mb-2">
+          <Image
+            src={highlight.user.avatar}
+            alt={highlight.user.name}
+            width={40}
+            height={40}
+            className="rounded-full mr-2"
+          />
+          <span className="font-bold">{highlight.user.name}</span>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Card>
-            <CardContent className="p-0">
-              <Image
-                src="/placeholder.svg"
-                alt="WNBA game"
-                width={400}
-                height={300}
-                className="w-full h-48 object-cover"
-              />
-            </CardContent>
-          </Card>
-          <Card className="bg-blue-50">
-            <CardContent className="p-4 flex flex-col justify-center h-full">
-              <h3 className="text-xl font-bold mb-2">WNBA Daily</h3>
-              <p className="text-gray-600 mb-4">Watch match highlights</p>
-              <Button>PLAY</Button>
-            </CardContent>
-          </Card>
+        <h2 className="text-xl font-bold mb-1">{highlight.title}</h2>
+        <p className="text-sm mb-2">{highlight.description}</p>
+        <div className="flex items-center space-x-4">
+          <button className="flex items-center">
+            <Heart className="w-6 h-6 mr-1" />
+            <span>{highlight.likes}</span>
+          </button>
+          <button className="flex items-center">
+            <MessageCircle className="w-6 h-6 mr-1" />
+            <span>{highlight.comments}</span>
+          </button>
+          <button className="flex items-center">
+            <Share2 className="w-6 h-6 mr-1" />
+            <span>Share</span>
+          </button>
         </div>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-bold mb-4">POPULAR MATCHES</h2>
-        <div className="grid grid-cols-2 gap-4">
-          {[
-            "South Carolina vs. Iowa",
-            "Iowa vs. UConn",
-            "Iowa vs. LSU",
-            "Iowa vs. Colorado",
-          ].map((match) => (
-            <Card key={match}>
-              <CardContent className="p-0">
-                <Image
-                  src="/placeholder.svg"
-                  alt={match}
-                  width={300}
-                  height={200}
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-3">
-                  <div className="text-sm text-gray-500">
-                    March Madness 2023
-                  </div>
-                  <div className="font-medium">{match}</div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+      </div>
     </div>
   );
 }

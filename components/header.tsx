@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export function Header({ isVisible }: { isVisible: boolean }) {
   if (!isVisible) return null;
@@ -19,6 +20,8 @@ export function Header({ isVisible }: { isVisible: boolean }) {
               src="/Groups/Phillip.png"
               alt="Profile"
               className="rounded-full"
+              height={30}
+              width={30}
             />
           </Button>
         </Link>

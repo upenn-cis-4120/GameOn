@@ -28,7 +28,7 @@ export default function HighlightsPage() {
   return (
     <div
       ref={containerRef}
-      className="h-[calc(100vh-4rem)] overflow-y-scroll snap-y snap-mandatory"
+      className="h-[calc(100vh-8rem)] overflow-y-scroll snap-y snap-mandatory"
     >
       {highlights.map((highlight, index) => (
         <HighlightItem

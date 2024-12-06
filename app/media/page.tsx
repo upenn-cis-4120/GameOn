@@ -5,7 +5,7 @@ import { Tweet } from "react-tweet";
 export default function MediaPage() {
   const [selectedPlatform, setSelectedPlatform] = useState("Instagram");
 
-  const platforms = ["Instagram", "X", "Facebook"];
+  const platforms = ["Instagram", "X"];
 
   // Example embed links (replace with actual links)
   const instagramPosts = [
@@ -42,15 +42,10 @@ export default function MediaPage() {
     "1840775696827789740",
     "1864043466658832709",
   ];
-  const facebookPosts = [
-    "https://www.facebook.com/bleacherreport",
-    "https://www.facebook.com/nba",
-  ];
 
   const getPosts = () => {
     if (selectedPlatform === "Instagram") return instagramPosts;
     if (selectedPlatform === "X") return xPosts;
-    if (selectedPlatform === "Facebook") return facebookPosts;
     return [];
   };
 
@@ -88,7 +83,7 @@ export default function MediaPage() {
                 src={post}
                 width="175"
                 height="175"
-                allowTransparency="true"
+                allowtransparency="true"
                 allow="encrypted-media"
                 scrolling="no"
                 frameBorder="0"
@@ -97,18 +92,6 @@ export default function MediaPage() {
             )}
             {selectedPlatform === "X" && (
                 <Tweet id={post} />
-            )}
-            {selectedPlatform === "Facebook" && (
-              <iframe 
-                src="https://www.facebook.com/bleacherreport/posts/1123801949101648?ref=embed_post" 
-                width="500" 
-                height="481" 
-                scrolling="no" 
-                frameBorder="0" 
-                allowFullScreen="true"
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              >
-              </iframe>
             )}
           </div>
         ))}

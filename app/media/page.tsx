@@ -1,111 +1,117 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import { Tweet } from "react-tweet";
 
 export default function MediaPage() {
+  const [selectedPlatform, setSelectedPlatform] = useState("Instagram");
+
+  const platforms = ["Instagram", "X", "Facebook"];
+
+  // Example embed links (replace with actual links)
+  const instagramPosts = [
+    "https://www.instagram.com/p/DC0N3l8Nvu0/embed",
+    "https://www.instagram.com/p/DDNhFjbogWx/embed",
+    "https://www.instagram.com/p/DDOLgBdxx7n/embed",
+    "https://www.instagram.com/p/DC-S2m_gCE-/embed",
+    "https://www.instagram.com/p/DDOHlJRRPgY/embed",
+    "https://www.instagram.com/p/DC9Rgmkq_mH/embed",
+    "https://www.instagram.com/p/DDOB_Fhtbu2/embed",
+    "https://www.instagram.com/p/DCuGBP1Pe2c/embed",
+    "https://www.instagram.com/p/DC67r_TRtpB/embed",
+    "https://www.instagram.com/p/DDOedzaxP5k/embed",
+    "https://www.instagram.com/p/DDOOq3Fs8eq/embed",
+    "https://www.instagram.com/p/DDN20t8gtbP/embed",
+    "https://www.instagram.com/p/DDOEk5bxvyJ/embed",
+    "https://www.instagram.com/p/DDN_UL0xv8L/embed",
+    "https://www.instagram.com/p/DDN86Uox_Z1/embed",
+    "https://www.instagram.com/p/DDKK40VobKB/embed",
+    "https://www.instagram.com/p/DDHNR-uIXYe/embed",
+    "https://www.instagram.com/p/DDBuVMVIdJO/embed"
+  ];
+  const xPosts = [
+    "1864890359005794776",
+    "1859009392470901157",
+    "1864921154722345247",
+    "1864532784066244911",
+    "1820113089972281701",
+    "1824656436862783598",
+    "1864909493525532741",
+    "1864765941025845383",
+    "1864879120296955936",
+    "1807953245740192248",
+    "1840775696827789740",
+    "1864043466658832709",
+  ];
+  const facebookPosts = [
+    "https://www.facebook.com/bleacherreport",
+    "https://www.facebook.com/nba",
+  ];
+
+  const getPosts = () => {
+    if (selectedPlatform === "Instagram") return instagramPosts;
+    if (selectedPlatform === "X") return xPosts;
+    if (selectedPlatform === "Facebook") return facebookPosts;
+    return [];
+  };
+
+  const posts = getPosts();
+
+  // Determine grid columns based on platform
+  const gridCols = selectedPlatform === "Instagram" ? "grid-cols-2" : "grid-cols-1";
+  const gapSize = selectedPlatform === "Instagram" ? "gap-4" : "gap-2";
+
   return (
     <div className="flex flex-col w-full p-4">
-      <h2 className="text-2xl font-bold mb-4">TRENDING POSTS</h2>
+      {/* Navigation Bar */}
+      <div className="flex justify-center gap-4 mb-6">
+        {platforms.map((platform) => (
+          <button
+            key={platform}
+            className={`px-4 py-2 rounded-lg font-bold ${
+              selectedPlatform === platform
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
+            onClick={() => setSelectedPlatform(platform)}
+          >
+            {platform}
+          </button>
+        ))}
+      </div>
 
-      <div className="flex flex-col gap-8">
-        {/* House of Highlights Section */}
-        <div className="max-w-full">
-          <div className="flex items-center gap-3 mb-4">
-            <img
-              src="/Media/househighlights.png"
-              alt={"House of Highlights"}
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <h3 className="text-xl text-gray-500">House of Highlights</h3>
+      {/* Posts Section */}
+      <div className={`grid ${gridCols} ${gapSize}`}>
+        {posts.map((post, index) => (
+          <div key={index} className="flex justify-center items-center">
+            {selectedPlatform === "Instagram" && (
+              <iframe
+                src={post}
+                width="175"
+                height="175"
+                allowTransparency="true"
+                allow="encrypted-media"
+                scrolling="no"
+                frameBorder="0"
+                className="rounded-lg"
+              ></iframe>
+            )}
+            {selectedPlatform === "X" && (
+                <Tweet id={post} />
+            )}
+            {selectedPlatform === "Facebook" && (
+              <iframe 
+                src="https://www.facebook.com/bleacherreport/posts/1123801949101648?ref=embed_post" 
+                width="500" 
+                height="481" 
+                scrolling="no" 
+                frameBorder="0" 
+                allowFullScreen="true"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              >
+              </iframe>
+            )}
           </div>
-
-          {/* Two Posts Per Row with Padding */}
-          <div className="grid grid-cols-2 gap-8">
-            <iframe
-              src="https://www.instagram.com/p/DC0N3l8Nvu0/embed"
-              width="150"
-              height="150"
-              allowTransparency="true"
-              allow="encrypted-media"
-              scrolling="no"
-              frameBorder="0"
-              style={{ borderRadius: '8px' }}
-            ></iframe>
-            <iframe
-              src="https://www.instagram.com/p/DC0N3l8Nvu0/embed"
-              width="150"
-              height="150"
-              allowTransparency="true"
-              allow="encrypted-media"
-              scrolling="no"
-              frameBorder="0"
-              style={{ borderRadius: '8px' }}
-            ></iframe>
-          </div>
-        </div>
-
-        {/* Bleacher Report Section */}
-        <div className="max-w-full">
-          <div className="flex items-center gap-3 mb-4">
-            <img
-              src="/Media/br.png"
-              alt={"Bleacher Report"}
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <h3 className="text-xl text-gray-500">Bleacher Report</h3>
-          </div>
-
-          {/* Two Posts Per Row with Padding */}
-          <div className="grid grid-cols-2 gap-8">
-            <iframe
-              src="https://www.instagram.com/p/DC0N3l8Nvu0/embed"
-              width="150"
-              height="150"
-              allowTransparency="true"
-              allow="encrypted-media"
-              scrolling="no"
-              frameBorder="0"
-              style={{ borderRadius: '8px' }}
-            ></iframe>
-            <iframe
-              src="https://www.instagram.com/p/DC0N3l8Nvu0/embed"
-              width="150"
-              height="150"
-              allowTransparency="true"
-              allow="encrypted-media"
-              scrolling="no"
-              frameBorder="0"
-              style={{ borderRadius: '8px' }}
-            ></iframe>
-          </div>
-        </div>
-
-        {/* NBA Twitter Section */}
-        <div>
-          <h2 className="text-2xl font-bold mb-4">LATEST TWEETS</h2>
-          <div className="flex items-center gap-3 mb-4">
-            <img
-              src="/Media/nba.jpg"
-              alt="NBA"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <h3 className="text-xl text-gray-500">NBA</h3>
-          </div>
-
-          {/* Two Tweets Per Row with Padding */}
-          <div className="grid grid-cols-2 gap-8">
-            <blockquote className="twitter-tweet" data-lang="en">
-              <a href="https://twitter.com/USER/status/TWEET_ID1"></a>
-            </blockquote>
-            <blockquote className="twitter-tweet" data-lang="en">
-              <a href="https://twitter.com/USER/status/TWEET_ID2"></a>
-            </blockquote>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

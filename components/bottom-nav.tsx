@@ -10,7 +10,7 @@ export function BottomNav({ isVisible }: { isVisible: boolean }) {
   if (!isVisible) return null;
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 border-t bg-white z-40">
+    <nav className="fixed bottom-0 left-0 right-0 border-t bg-white z-50">
       <div className="flex justify-around items-center h-14">
         <NavItem
           href="/media"

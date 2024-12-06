@@ -28,7 +28,7 @@ export default function HighlightsPage() {
   return (
     <div
       ref={containerRef}
-      className="h-[calc(100vh-8rem)] overflow-y-scroll snap-y snap-mandatory"
+      className="h-[calc(100vh-rem)] overflow-y-scroll snap-y snap-mandatory"
     >
       {highlights.map((highlight, index) => (
         <HighlightItem
@@ -50,10 +50,8 @@ function HighlightItem({
 }) {
   return (
     <div className="h-[calc(100vh-4rem)] snap-start flex flex-col relative max-h-[733px]">
-      <div className="flex-1 bg-black">
-        <YouTubeShort videoId={highlight.videoId} />
-      </div>
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent text-white">
+      <YouTubeShort videoId={highlight.videoId} />
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent text-white z-10">
         <div className="flex items-center mb-2">
           <Image
             src={highlight.user.avatar}

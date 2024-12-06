@@ -7,8 +7,8 @@ interface YouTubeShortProps {
 
 const YouTubeShort: React.FC<YouTubeShortProps> = ({ videoId }) => {
   const opts = {
-    height: "600",
-    width: "315",
+    height: "720",
+    width: "390",
     playerVars: {
       autoplay: 0,
     },
@@ -19,7 +19,7 @@ const YouTubeShort: React.FC<YouTubeShortProps> = ({ videoId }) => {
   };
 
   return (
-    <div className="youtube-short-container">
+    <div className="youtube-short-container z-0">
       <YouTube videoId={videoId} opts={opts} onReady={onReady} />
     </div>
   );

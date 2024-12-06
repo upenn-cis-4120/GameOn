@@ -1,49 +1,132 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
+import { useSports } from "@/contexts/SportsContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+const sportStats: { [key: string]: { team: string; logo: string; players: { name: string; pts: number; ast: number; reb: number; img: string }[] }[] } = {
+  Basketball: [
+    {
+      team: "SIXERS",
+      logo: "/Stats/sixers-logo.png",
+      players: [
+        { name: "Joel Embiid", pts: 39, ast: 7, reb: 10, img: "/Stats/joel-embiid.png" },
+        { name: "Tyrese Maxey", pts: 25, ast: 8, reb: 2, img: "/Stats/tyrese-maxey.png" },
+      ],
+    },
+    {
+      team: "KNICKS",
+      logo: "/Stats/knicks-logo.png",
+      players: [
+        { name: "Julius Randle", pts: 28, ast: 3, reb: 6, img: "/Stats/julius-randle.png" },
+        { name: "Jalen Brunson", pts: 41, ast: 12, reb: 3, img: "/Stats/jalen-brunson.png" },
+      ],
+    },
+  ],
+  Football: [
+    {
+      team: "PATRIOTS",
+      logo: "/patriots_logo.svg",
+      players: [
+        { name: "Tom Brady", pts: 3, ast: 0, reb: 0, img: "/brady.jpg" },
+        { name: "Rob Gronkowski", pts: 2, ast: 0, reb: 0, img: "/gronkowski.jpg" },
+      ],
+    },
+    {
+      team: "GIANTS",
+      logo: "/giants_logo.svg",
+      players: [
+        { name: "Eli Manning", pts: 2, ast: 1, reb: 0, img: "/manning.jpg" },
+        { name: "Odell Beckham Jr.", pts: 1, ast: 1, reb: 0, img: "/beckham.jpg" },
+      ],
+    },
+  ],
+  // Add more sports and their corresponding stats
+};
+
+const sportVideos: { [key: string]: string } = {
+  Basketball: "https://www.youtube.com/embed/7VUvcuHwgtw?si=G43zmdB6VHMfbUNJ",
+  Football: "https://www.youtube.com/embed/1RwlGrjUdek?si=TCp8qg7Bj5xu05vJ",
+  Soccer: "https://www.youtube.com/embed/7fS04X3Qy4Y?si=buwhXLzEU0dtRqng",
+  Tennis: "https://www.youtube.com/embed/KrV9XK36U1A?si=8XU5KDYpTZ_Eil4l",
+  Golf: "https://www.youtube.com/embed/P0BXiDrkt04?si=7BGDbGIjgxlH-a1r",
+  // Add more sports and their corresponding YouTube embed URLs
+};
+
 export default function StatsPage() {
+  const { selectedSports } = useSports();
+  const [showAllPlayers, setShowAllPlayers] = useState(false);
+
   return (
     <div className="px-4">
       <section className="mb-8">
         <h2 className="text-2xl font-bold mb-4">FEATURED MATCH</h2>
-        <Card>
-          <CardContent className="p-0">
-            <Image
-              src="/placeholder.svg"
-              alt="Game highlight"
-              width={600}
-              height={400}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <div className="flex justify-between items-center mb-4">
-                <TeamScore team="SIXERS" score={121} />
-                <TeamScore team="KNICKS" score={112} reverse />
-              </div>
-              <Button className="w-full" variant="secondary">
-                See Match
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        {selectedSports.length > 0 ? (
+          selectedSports.map((sport) => (
+            <Card key={sport} className="bg-blue-50">
+              <CardContent className="p-0">
+                <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
+                  <iframe
+                    src={sportVideos[sport] || "https://www.youtube.com/embed/DEFAULT_VIDEO_ID"}
+                    title={`${sport} game`}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                    }}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <div className="p-4">
+                  <div className="flex justify-between items-center mb-4">
+                    {sportStats[sport]?.map((teamStats, index) => (
+                      <TeamScore key={teamStats.team} team={teamStats.team} score={index === 0 ? 101 : 104} logo={teamStats.logo} reverse={index !== 0} />
+                    ))}
+                  </div>
+                  <Button className="w-full" variant="secondary">
+                    See Match
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))
+        ) : (
+          <p className="text-center text-gray-500 my-8">
+            No sports selected. Visit your profile to add sports preferences.
+          </p>
+        )}
       </section>
 
       <section>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">STATISTICS</h2>
-          <Button variant="link">See All</Button>
+          <h2 className="text-2xl font-bold text-blue-600">STATISTICS</h2>
+          <Button variant="link" onClick={() => setShowAllPlayers(!showAllPlayers)}>
+            {showAllPlayers ? "Show Less" : "See All"}
+          </Button>
         </div>
 
         <div className="space-y-4">
-          {[
-            { name: "Joel Embiid", pts: 39, ast: 7, reb: 10 },
-            { name: "Tyrese Maxey", pts: 25, ast: 8, reb: 2 },
-            { name: "Jalen Brunson", pts: 41, ast: 12, reb: 3 },
-            { name: "Julius Randle", pts: 28, ast: 3, reb: 6 },
-          ].map((player) => (
-            <PlayerStats key={player.name} player={player} />
-          ))}
+          {selectedSports.length > 0 ? (
+            selectedSports.map((sport) =>
+              sportStats[sport]?.map((teamStats) => (
+                <div key={teamStats.team} className="bg-blue-50 p-4 rounded-lg">
+                  <h3 className="text-xl font-bold mb-2 text-blue-700">{teamStats.team}</h3>
+                  {teamStats.players.slice(0, showAllPlayers ? teamStats.players.length : 2).map((player) => (
+                    <PlayerStats key={player.name} player={player} />
+                  ))}
+                </div>
+              ))
+            )
+          ) : (
+            <p className="text-center text-gray-500 my-8">
+              No sports selected. Visit your profile to add sports preferences.
+            </p>
+          )}
         </div>
       </section>
     </div>
@@ -53,10 +136,12 @@ export default function StatsPage() {
 function TeamScore({
   team,
   score,
+  logo,
   reverse = false,
 }: {
   team: string;
   score: number;
+  logo: string;
   reverse?: boolean;
 }) {
   return (
@@ -64,14 +149,14 @@ function TeamScore({
       className={`flex items-center gap-2 ${reverse ? "flex-row-reverse" : ""}`}
     >
       <Image
-        src="/placeholder.svg"
+        src={logo}
         alt={`${team} logo`}
         width={40}
         height={40}
       />
       <div className={reverse ? "text-right" : ""}>
-        <div className="font-bold">{team}</div>
-        <div className="text-2xl font-bold">{score}</div>
+        <div className="font-bold text-blue-700">{team}</div>
+        <div className="text-2xl font-bold text-blue-900">{score}</div>
       </div>
     </div>
   );
@@ -80,20 +165,20 @@ function TeamScore({
 function PlayerStats({
   player,
 }: {
-  player: { name: string; pts: number; ast: number; reb: number };
+  player: { name: string; pts: number; ast: number; reb: number; img: string };
 }) {
   return (
-    <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+    <div className="flex items-center gap-4 p-4 bg-blue-100 rounded-lg">
       <Image
-        src="/placeholder.svg"
+        src={player.img}
         alt={player.name}
         width={48}
         height={48}
         className="rounded-full"
       />
       <div className="flex-1">
-        <div className="font-medium">{player.name}</div>
-        <div className="flex gap-4 text-sm text-gray-500">
+        <div className="font-medium text-blue-800">{player.name}</div>
+        <div className="flex gap-4 text-sm text-blue-600">
           <span>PTS: {player.pts}</span>
           <span>AST: {player.ast}</span>
           <span>REB: {player.reb}</span>

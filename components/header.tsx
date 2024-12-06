@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function Header() {
+export function Header({ isVisible }: { isVisible: boolean }) {
+  if (!isVisible) return null;
   return (
     <header className="fixed top-0 left-0 right-0 bg-white border-b z-10">
       <div className="p-4 flex items-center justify-between">

@@ -4,8 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, BarChart2, Play, Image, Users } from "lucide-react";
 
-export function BottomNav() {
+export function BottomNav({ isVisible }: { isVisible: boolean }) {
   const pathname = usePathname();
+
+  if (!isVisible) return null;
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 border-t bg-white">

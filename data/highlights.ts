@@ -104,3 +104,5 @@ export interface Highlight {
         avatar: "/placeholder.svg?height=50&width=50"
       }
     }
+  ]
+  
